@@ -225,6 +225,21 @@ void lv_chart_refresh(lv_obj_t * obj);
 lv_chart_series_t * lv_chart_add_series(lv_obj_t * obj, lv_color_t color, lv_chart_axis_t axis);
 
 /**
+ * Sets the user data pointer kept on the chart series.
+ * @param series    pointer to the chart series
+ * @param udata     user data
+ */
+void lv_chart_series_set_user_data(lv_chart_series_t *series, void *udata);
+
+/**
+ * Retrieves the user data pointer kept on a chart series.
+ * @param series    pointer to the chart series
+ * @return          the user data pointer
+ */
+void *lv_chart_series_user_data(lv_chart_series_t *series);
+
+
+/**
  * Deallocate and remove a data series from a chart
  * @param obj       pointer to a chart object
  * @param series    pointer to a data series on 'chart'
@@ -284,6 +299,20 @@ lv_chart_series_t * lv_chart_get_series_next(const lv_obj_t * chart, const lv_ch
  * @return          pointer to the created cursor
  */
 lv_chart_cursor_t  * lv_chart_add_cursor(lv_obj_t * obj, lv_color_t color, lv_dir_t dir);
+
+/**
+ * Sets the user data pointer kept on the chart cursor.
+ * @param cursor    pointer to the chart cursor
+ * @param udata     user data
+ */
+void lv_chart_cursor_set_user_data(lv_chart_cursor_t *cursor, void *udata);
+
+/**
+ * Retrieves the user data pointer kept on a chart cursor.
+ * @param cursor    pointer to the chart cursor
+ * @return          the user data pointer
+ */
+void *lv_chart_cursor_user_data(lv_chart_cursor_t *cursor);
 
 /**
  * Remove a cursor

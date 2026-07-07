@@ -172,6 +172,7 @@ lv_span_t * lv_spangroup_add_span(lv_obj_t * obj)
     lv_style_init(&span->style);
     span->txt = (char *)"";
     span->static_flag = 1;
+    span->user_data = NULL;
 
     lv_spangroup_refresh(obj);
 
@@ -207,6 +208,16 @@ void lv_spangroup_delete_span(lv_obj_t * obj, lv_span_t * span)
 /*=====================
  * Setter functions
  *====================*/
+
+void lv_span_set_user_data(lv_span_t *span, void *udata)
+{
+    span->user_data = udata;
+}
+
+void *lv_span_user_data(lv_span_t *span)
+{
+    return span->user_data;
+}
 
 void lv_span_set_text(lv_span_t * span, const char * text)
 {

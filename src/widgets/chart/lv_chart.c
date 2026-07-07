@@ -460,6 +460,17 @@ void lv_chart_refresh(lv_obj_t * obj)
  * Series
  *=====================*/
 
+
+void lv_chart_series_set_user_data(lv_chart_series_t *series, void *udata)
+{
+    series->user_data = udata;
+}
+
+void *lv_chart_series_user_data(lv_chart_series_t *series)
+{
+    return series->user_data;
+}
+
 lv_chart_series_t * lv_chart_add_series(lv_obj_t * obj, lv_color_t color, lv_chart_axis_t axis)
 {
     LV_LOG_INFO("begin");
@@ -587,6 +598,16 @@ lv_chart_series_t * lv_chart_get_series_next(const lv_obj_t * obj, const lv_char
  * Cursor
  *====================*/
 
+void lv_chart_cursor_set_user_data(lv_chart_cursor_t *cursor, void *udata)
+{
+    cursor->user_data = udata;
+}
+
+void *lv_chart_cursor_user_data(lv_chart_cursor_t *cursor)
+{
+    return cursor->user_data;
+}
+
 lv_chart_cursor_t  * lv_chart_add_cursor(lv_obj_t * obj, lv_color_t color, lv_dir_t dir)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
@@ -601,6 +622,7 @@ lv_chart_cursor_t  * lv_chart_add_cursor(lv_obj_t * obj, lv_color_t color, lv_di
     cursor->pos_set = 0;
     cursor->color = color;
     cursor->dir = dir;
+    cursor->user_data = NULL;
 
     return cursor;
 }

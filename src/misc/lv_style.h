@@ -378,6 +378,7 @@ typedef struct {
 
     uint32_t has_group;
     uint8_t prop_cnt;   /**< 255 means it's a constant style*/
+    void *user_data;
 } lv_style_t;
 
 /**********************

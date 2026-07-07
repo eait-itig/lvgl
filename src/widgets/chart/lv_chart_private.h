@@ -40,6 +40,7 @@ struct _lv_chart_series_t {
     uint32_t y_ext_buf_assigned : 1;
     uint32_t x_axis_sec : 1;
     uint32_t y_axis_sec : 1;
+    void *user_data;
 };
 
 struct _lv_chart_cursor_t {
@@ -49,6 +50,7 @@ struct _lv_chart_cursor_t {
     lv_chart_series_t * ser;
     lv_dir_t dir;
     uint32_t pos_set: 1;        /**< 1: pos is set; 0: point_id is set */
+    void *user_data;
 };
 
 struct _lv_chart_t {

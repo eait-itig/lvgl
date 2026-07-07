@@ -411,6 +411,16 @@ void lv_scale_set_draw_ticks_on_top(lv_obj_t * obj, bool en)
     lv_obj_invalidate(obj);
 }
 
+void lv_scale_section_set_user_data(lv_scale_section_t *section, void *udata)
+{
+     section->user_data = udata;
+}
+
+void *lv_scale_section_user_data(lv_scale_section_t *section)
+{
+    return section->user_data;
+}
+
 lv_scale_section_t * lv_scale_add_section(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);

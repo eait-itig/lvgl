@@ -233,6 +233,20 @@ void lv_scale_set_draw_ticks_on_top(lv_obj_t * obj, bool en);
 lv_scale_section_t * lv_scale_add_section(lv_obj_t * obj);
 
 /**
+ * Sets the user data pointer kept on the scale section.
+ * @param series    pointer to the scale section
+ * @param udata     user data
+ */
+void lv_scale_section_set_user_data(lv_scale_section_t *series, void *udata);
+
+/**
+ * Retrieves the user data pointer kept on a scale section.
+ * @param series    pointer to the scale section
+ * @return          the user data pointer
+ */
+void *lv_scale_section_user_data(lv_scale_section_t *series);
+
+/**
  * DEPRECATED, use lv_scale_set_section_range instead.
  * Set range for specified Scale Section
  * @param section       pointer to Section

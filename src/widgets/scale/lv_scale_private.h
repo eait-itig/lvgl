@@ -54,6 +54,8 @@ struct _lv_scale_section_t {
                                             * `first_tick_idx_in_section` represents a major tick. */
     uint32_t last_tick_idx_is_major  : 1;  /**< Internal (set during drawing): true if
                                             * `last_tick_idx_in_section` represents a major tick. */
+
+    void *user_data;
 };
 typedef struct {
     lv_obj_t * obj;

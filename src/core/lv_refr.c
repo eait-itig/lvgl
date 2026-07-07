@@ -397,6 +397,13 @@ void lv_display_refr_timer(lv_timer_t * tmr)
         return;
     }
 
+    /*Do nothing if there is no active screen*/
+    if(disp_refr->act_scr == NULL) {
+        disp_refr->inv_p = 0;
+        LV_LOG_WARN("there is no active screen");
+        goto refr_finish;
+    }
+
     /*Refresh the screen's layout if required*/
     LV_PROFILER_LAYOUT_BEGIN_TAG("layout");
     lv_obj_update_layout(disp_refr->act_scr);
@@ -406,13 +413,6 @@ void lv_display_refr_timer(lv_timer_t * tmr)
     lv_obj_update_layout(disp_refr->top_layer);
     lv_obj_update_layout(disp_refr->sys_layer);
     LV_PROFILER_LAYOUT_END_TAG("layout");
-
-    /*Do nothing if there is no active screen*/
-    if(disp_refr->act_scr == NULL) {
-        disp_refr->inv_p = 0;
-        LV_LOG_WARN("there is no active screen");
-        goto refr_finish;
-    }
 
     lv_refr_join_area();
     refr_sync_areas();

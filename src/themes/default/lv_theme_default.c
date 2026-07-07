@@ -31,7 +31,7 @@ typedef struct _my_theme_t my_theme_t;
 #define LIGHT_COLOR_CARD       lv_color_white()
 #define LIGHT_COLOR_TEXT       lv_palette_darken(LV_PALETTE_GREY, 4)
 #define LIGHT_COLOR_GREY       lv_palette_lighten(LV_PALETTE_GREY, 2)
-#define DARK_COLOR_SCR         lv_color_hex(0x15171A)
+#define DARK_COLOR_SCR         lv_color_hex(0x48206C)
 #define DARK_COLOR_CARD        lv_color_hex(0x282b30)
 #define DARK_COLOR_TEXT        lv_palette_lighten(LV_PALETTE_GREY, 5)
 #define DARK_COLOR_GREY        lv_color_hex(0x2f3237)
@@ -396,7 +396,7 @@ static void style_init(my_theme_t * theme)
 
 #if LV_USE_ARC
     style_init_reset(&theme->styles.arc_indic);
-    lv_style_set_arc_color(&theme->styles.arc_indic, theme->color_grey);
+    lv_style_set_arc_color(&theme->styles.arc_indic, LIGHT_COLOR_GREY);
     lv_style_set_arc_width(&theme->styles.arc_indic, LV_DPX_CALC(theme->disp_dpi, 15));
     lv_style_set_arc_rounded(&theme->styles.arc_indic, true);
 

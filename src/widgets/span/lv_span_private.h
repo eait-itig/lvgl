@@ -34,6 +34,7 @@ struct _lv_span_t {
 
     lv_point_t trailing_pos;
     int32_t trailing_height;
+    void *user_data;
 };
 
 /** Data of label*/

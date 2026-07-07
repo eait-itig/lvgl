@@ -95,6 +95,14 @@ static inline void indev_scroll_throw_anim_reset(lv_indev_t * indev)
     }
 }
 
+static void indev_ensure_inactive(lv_indev_t *indev)
+{
+    if (indev_act == indev) {
+        indev_act = NULL;
+        indev_obj_act = NULL;
+    }
+}
+
 /**********************
  *  STATIC VARIABLES
  **********************/
@@ -157,6 +165,8 @@ lv_indev_t * lv_indev_create(void)
 void lv_indev_delete(lv_indev_t * indev)
 {
     LV_ASSERT_NULL(indev);
+
+    indev_ensure_inactive(indev);
 
     lv_indev_send_event(indev, LV_EVENT_DELETE, NULL);
     lv_event_mark_deleted(indev);

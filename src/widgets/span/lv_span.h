@@ -107,6 +107,20 @@ void lv_spangroup_delete_span(lv_obj_t * obj, lv_span_t * span);
  */
 void lv_span_set_text(lv_span_t * span, const char * text);
 
+/**
+ * Sets the user data pointer kept on the span.
+ * @param series    pointer to the span
+ * @param udata     user data
+ */
+void lv_span_set_user_data(lv_span_t *span, void *udata);
+
+/**
+ * Retrieves the user data pointer kept on a span.
+ * @param series    pointer to the span
+ * @return          the user data pointer
+ */
+void *lv_span_user_data(lv_span_t *span);
+
 
 /**
  * Set a new text for a span using a printf-like formatting string.
