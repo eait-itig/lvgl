@@ -343,9 +343,9 @@ void lv_textarea_delete_char(lv_obj_t * obj)
 
     if(ta->pwd_mode) {
         size_t new_size, orig_size = lv_strlen(ta->pwd_tmp);
-        lv_txt_cut(ta->pwd_tmp, ta->cursor.pos - 1, 1);
+        lv_text_cut(ta->pwd_tmp, ta->cursor.pos - 1, 1);
         new_size = lv_strlen(ta->pwd_tmp);
-        explicit_bzero(ta->pwd_tmp + orig_size, orig_size - new_size);
+        lv_memzero(ta->pwd_tmp + orig_size, orig_size - new_size);
     }
 
     /*Move the cursor to the place of the deleted character*/
@@ -383,7 +383,7 @@ void lv_textarea_set_text(lv_obj_t * obj, const char * txt)
         lv_label_set_text(ta->label, "");
         lv_textarea_set_cursor_pos(obj, LV_TEXTAREA_CURSOR_LAST);
         if(ta->pwd_mode) {
-            explicit_bzero(ta->pwd_tmp, ta->pwd_tmp_len);
+            lv_memzero(ta->pwd_tmp, ta->pwd_tmp_len);
         }
         uint32_t i = 0;
         while(txt[i] != '\0') {
@@ -404,7 +404,7 @@ void lv_textarea_set_text(lv_obj_t * obj, const char * txt)
 
     if(ta->pwd_mode) {
         if (lv_strlen(txt) + 1 > ta->pwd_tmp_len) return;
-        explicit_bzero(ta->pwd_tmp, ta->pwd_tmp_len);
+        lv_memzero(ta->pwd_tmp, ta->pwd_tmp_len);
         lv_strcpy(ta->pwd_tmp, txt);
 
         pwd_char_hider(obj);
@@ -511,7 +511,7 @@ void lv_textarea_set_password_mode(lv_obj_t * obj, bool en)
 #if LV_MEM_CUSTOM_SECURE == 1
         LV_MEM_CUSTOM_SECURE_FREE(ta->pwd_tmp, ta->pwd_tmp_len);
 #else
-        explicit_bzero(ta->pwd_tmp, ta->pwd_tmp_len);
+        lv_memzero(ta->pwd_tmp, ta->pwd_tmp_len);
         lv_mem_free(ta->pwd_tmp);
 #endif
         ta->pwd_tmp = NULL;
@@ -622,11 +622,11 @@ void lv_textarea_set_max_length(lv_obj_t * obj, uint32_t num)
         LV_ASSERT_MALLOC(new_alloc);
         if(new_alloc == NULL) return;
 
-        bcopy(ta->pwd_tmp, new_alloc, ta->pwd_tmp_len);
+        lv_memcpy(new_alloc, ta->pwd_tmp, ta->pwd_tmp_len);
 #if LV_MEM_CUSTOM_SECURE == 1
         LV_MEM_CUSTOM_SECURE_FREE(ta->pwd_tmp, ta->pwd_tmp_len);
 #else
-        explicit_bzero(ta->pwd_tmp, ta->pwd_tmp_len);
+        lv_memzero(ta->pwd_tmp, ta->pwd_tmp_len);
         lv_mem_free(ta->pwd_tmp);
 #endif
 
@@ -996,7 +996,7 @@ static void lv_textarea_destructor(const lv_obj_class_t * class_p, lv_obj_t * ob
 #if LV_MEM_CUSTOM_SECURE == 1
         LV_MEM_CUSTOM_SECURE_FREE(ta->pwd_tmp, ta->pwd_tmp_len);
 #else
-        explicit_bzero(ta->pwd_tmp, ta->pwd_tmp_len);
+        lv_memzero(ta->pwd_tmp, ta->pwd_tmp_len);
         lv_mem_free(ta->pwd_tmp);
 #endif
         ta->pwd_tmp = NULL;
@@ -1154,8 +1154,8 @@ static void pwd_char_hider(lv_obj_t * obj)
     txt_tmp[i * bullet_len] = '\0';
 
     lv_label_set_text(ta->label, txt_tmp);
-    explicit_bzero(txt_tmp, enc_len * bullet_len + 1);
-    lv_mem_buf_release(txt_tmp);
+    lv_memzero(txt_tmp, enc_len * bullet_len + 1);
+    lv_free(txt_tmp);
 
     refr_cursor_area(obj);
 }
